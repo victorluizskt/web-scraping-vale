@@ -1,11 +1,9 @@
 import './App.css'
-import Modal from './components/modal'
+import BasicCard from './components/card'
 
 function App() {
   return (
-    <>
-      <Modal />
-    </>
+    <BasicCard />
   )
 }
 
