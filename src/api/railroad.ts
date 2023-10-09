@@ -15,7 +15,7 @@ interface RailwayLocation {
     }[];
 };
 
-export const getRailwayLocations = async (railroadCode: string): Promise<RailwayLocation[]> => {
+export const getRailwayLocations = async (railroadCode?: string): Promise<RailwayLocation[]> => {
     try {
         const params = {
             codigoFerrovia: railroadCode,

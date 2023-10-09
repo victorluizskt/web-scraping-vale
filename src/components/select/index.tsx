@@ -11,33 +11,59 @@ const railroads = [
 ];
 
 export default function SelectSmall() {
-  const [railroad, ] = useState(String);
-
+  const [railroad, setRailroad] = useState(String);
+  const [origin, setOrigin] = useState(Object);
   const handleChange = async (event: SelectChangeEvent) => {
-    const id = event.target.value;
-    const response = await getRailwayLocations(id);
-    console.log(response);
+    const idWagon = railroads.find(railroad => railroad.title === event.target.value)?.id;
+    const response = await getRailwayLocations(idWagon);
+    setOrigin(response);
   };
 
+  console.log(origin);
+
   return (
-    <FormControl 
-        variant="standard" 
-        sx={{ m: 1, minWidth: 120, width: '100%' }} 
-        size="small"
-    >
-        <InputLabel id="demo-simple-select-standard-label">Ferrovia</InputLabel>
-        <Select
-            labelId="demo-simple-select-standard-label"
-            id="demo-simple-select-standard"
-            value={railroad}
-            onChange={handleChange}
+    <>
+        <FormControl 
+            variant="standard" 
+            sx={{ m: 1, minWidth: 120, width: '100%' }} 
+            size="small"
         >
-        {railroads.map(railroad => (
-            <MenuItem value={railroad.id}>
-                {railroad.title}
-            </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
+            <InputLabel id="demo-simple-select-standard-label">Ferrovia</InputLabel>
+            <Select
+                labelId="demo-simple-select-standard-label"
+                id="demo-simple-select-standard"
+                value={railroad}
+                onChange={(e) => handleChange(e)}
+            >
+            {railroads.map(railroad => (
+                <MenuItem 
+                    value={railroad.title}
+                    onClick={() => setRailroad(railroad.title)}
+                >
+                    {railroad.title}
+                </MenuItem>
+            ))}
+        </Select>
+        </FormControl>
+        {/* <FormControl 
+            variant="standard" 
+            sx={{ m: 1, minWidth: 120, width: '100%' }} 
+            size="small"
+        >
+            <InputLabel id="demo-simple-select-standard-label">Origem</InputLabel>
+            <Select
+                labelId="demo-simple-select-standard-label"
+                id="demo-simple-select-standard"
+                value={railroad}
+                onChange={handleChange}
+            >
+            {railroads.map(railroad => (
+                <MenuItem value={railroad.id}>
+                    {railroad.title}
+                </MenuItem>
+            ))}
+        </Select>
+        </FormControl> */}
+    </>
   );
 }
