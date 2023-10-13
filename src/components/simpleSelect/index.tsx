@@ -4,11 +4,12 @@ import SimpleSelectProps from "../../interface/SimpleSelectProps";
 const SimpleSelect = ({ 
     titleLabel, 
     valueSelect,
-    onChangeSelect,
     disabled,
     array,
     setItem,
     keyRender,
+    state,
+    keySave,
 }: SimpleSelectProps<any>) => (
     <FormControl
         variant="standard" 
@@ -24,13 +25,15 @@ const SimpleSelect = ({
             labelId="demo-simple-select-standard-label"
             id="demo-simple-select-standard"
             value={valueSelect}
-            onChange={(e) => onChangeSelect(e.target.value)}
             disabled={disabled}
         >
             {array.length > 0 && array.map((item: any) => (
                 <MenuItem
                     value={item[keyRender]}
-                    onClick={() => setItem(item[keyRender])}
+                    onClick={() => setItem({
+                        ...state,
+                        [keySave]: item[keyRender]
+                    })}
                 >
                     {item[keyRender]}
                 </MenuItem>

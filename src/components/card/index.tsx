@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -8,13 +8,25 @@ import SelectSmall from '../select';
 import railroads from '../../utils/railroadsList';
 import './styles.css';
 import SimpleSelect from '../simpleSelect';
+import { handleChange } from '../../utils/functions';
+import Railroad from '../../interface/Railroad';
+
+const initialRailroad: Railroad = {
+  railroadSelected: '',
+  id: '',
+  origin: [],
+  classPassage: [],
+};
 
 export default function BasicCard() {
-  const [railroad, setRailroad] = useState(String);
-  console.log(railroad);
-  const handleChange = () => {
-    console.log('hi barbie');
-  };
+  const [railroad, setRailroad] = useState(initialRailroad);
+  useEffect(() => {
+    const fetchData = async () => {
+      handleChange({ setRailroad, initialState: railroad  });
+    };
+
+    fetchData();
+  }, [railroad.railroadSelected]);
   return (
     <Card sx={{ minWidth: 275, width: 620, height: 400 }}>
       <CardContent>
@@ -25,11 +37,12 @@ export default function BasicCard() {
           titleLabel="Ferrovia"
           array={railroads}
           setItem={setRailroad}
-          valueSelect={railroad}
-          onChangeSelect={handleChange}
-          key={railroad}
+          state={railroad}
+          valueSelect={railroad.railroadSelected}
+          key={railroad.id}
           disabled={railroads.length === 0}
           keyRender='value'
+          keySave='railroadSelected'
         />
         <SelectSmall />
         <Typography sx={{ mb: 1.5 }} color="text.secondary">

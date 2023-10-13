@@ -31,8 +31,6 @@ export default function SelectSmall() {
     setClassPassage(classPassage.message.classesPassagem);
   };
 
-  console.log(classPassage);
-
   return (
     <>
         <FormControl 
