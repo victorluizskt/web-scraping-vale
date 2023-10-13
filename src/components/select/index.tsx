@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { getRailwayLocations, getClassPassageSearch } from '../../api/railroad';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -10,6 +9,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import Locale from '../../interface/Locale';
 import ClassPassage from '../../interface/ClassPassage';
+import { getClassPassageSearch, getRailwayLocations } from '../../services/railroad';
 
 const railroads = [
     { title: 'ESTRADA DE FERRO CARAJAS (MA-PA)', id: "04" },

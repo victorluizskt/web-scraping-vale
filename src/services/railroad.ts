@@ -1,4 +1,4 @@
-import api from './base';
+import api from "../api/base";
 
 interface RailwayLocation {
     message: {
