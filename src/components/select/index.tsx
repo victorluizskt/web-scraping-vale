@@ -8,30 +8,13 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
+import Locale from '../../interface/Locale';
+import ClassPassage from '../../interface/ClassPassage';
 
 const railroads = [
     { title: 'ESTRADA DE FERRO CARAJAS (MA-PA)', id: "04" },
     { title: 'ESTRADA DE FERRO VITORIA A MINAS', id: "03" },
 ];
-
-interface Locale {
-    codigo: string, 
-    codigoIBGE: string, 
-    descricaoDetalhada: string, 
-    descricaoInternet: string, 
-    ferroviaOperadora: string, 
-    ferroviaProprietaria: string, 
-    id: number, 
-    sequencia: any, 
-    unidadeFederacao: string
-};
-
-interface ClassPassage {
-    codigoFerrovia: string;
-    id: Int32Array;
-    indicadorClasseCadeirante: string;
-    nome: string;
-}
 
 export default function SelectSmall() {
   const [railroad, setRailroad] = useState(String);
