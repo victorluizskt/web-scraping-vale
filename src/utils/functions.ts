@@ -15,6 +15,7 @@ const handleChange = async ({ setRailroad, initialState }: HandleChange) => {
       setRailroad({
         ...initialState,
         origin: response.message.locaisFerroviarios,
+        destiny: response.message.locaisFerroviarios,
         classPassage: classPassage.message.classesPassagem,
       });
     };
