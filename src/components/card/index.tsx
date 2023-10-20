@@ -10,6 +10,9 @@ import './styles.css';
 import RadioButton from '../radioButton';
 import DatePicker from '../datePicker';
 import ButtonPlus from '../buttonPlus';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 const initialRailroad: Railroad = {
   railroadSelected: '',
@@ -21,6 +24,9 @@ const initialRailroad: Railroad = {
   classPassage: [],
   classPassageSelected: '',
   numberOfPassengers: 0,
+  email: '',
+  initialDate: '',
+  finalDate: '',
 };
 
 export default function BasicCard() {
@@ -35,8 +41,17 @@ export default function BasicCard() {
     fetchData();
   }, [railroad.railroadSelected]);
 
+  console.log(railroad)
+  const verifyDisabled = (
+    railroad.railroadSelected === ''
+    || railroad.originSelected === ''
+    || railroad.destinySelected === ''
+    || railroad.classPassageSelected === ''
+    || railroad.email === ''
+    || railroad.initialDate === ''
+  )
   return (
-    <Card sx={{ minWidth: 275, width: 620, height: 400 }}>
+    <Card sx={{ minWidth: 275, width: 620, height: 480 }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Automatize sua busca por passagens
@@ -80,7 +95,11 @@ export default function BasicCard() {
         <RadioButton 
           setGoing={setGoing}
         />
-        <DatePicker going={going} />
+        <DatePicker 
+          going={going} 
+          setRailroad={setRailroad}
+          railroad={railroad}
+        />
         <div style={{ 
             display: 'grid', 
             marginTop: '14px', 
@@ -103,6 +122,38 @@ export default function BasicCard() {
               quantity={quantity} 
               setQuantity={setQuantity} 
             />
+        </div>
+        <div style={{ 
+            display: 'grid', 
+            marginTop: '20px', 
+            alignItems: 'end', 
+            flexDirection: 'row', 
+            gridTemplateColumns: '65% 35%'
+        }}>
+          <Box
+            component="form"
+            sx={{
+              '& > :not(style)': { m: 1, width: '100%' },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField 
+              id="standard-basic" 
+              label="E-mail" 
+              variant="standard"
+              onChange={(e) => setRailroad({
+                ...railroad,
+                email: e.target.value
+              })}
+            />
+          </Box>
+          <Button
+            variant="text"
+            disabled={verifyDisabled}
+          >
+            Enviar
+          </Button>
         </div>
       </CardContent>
     </Card>

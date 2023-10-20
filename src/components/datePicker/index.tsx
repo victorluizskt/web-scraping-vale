@@ -1,25 +1,35 @@
-interface DatePicker {
-    going: boolean;
-};
+import React from 'react';
 
-// add onclick by selected field and save my state
-const DatePicker = ({ going } : DatePicker) => {
-    return (
-        <div style={{ display: 'flex', width: '100%'}}>
+interface DatePickerProps {
+  going: boolean;
+  railroad: {
+    initialDate: string;
+    finalDate: string;
+  };
+  setRailroad: (railroad: any) => void;
+}
+
+const DatePicker: React.FC<DatePickerProps> = ({ going, railroad, setRailroad }) => {
+  return (
+    <div style={{ display: 'flex', width: '100%' }}>
+      <input
+        style={{ marginRight: '5px', width: '100%' }}
+        id="initialDate"
+        type="date"
+        value={railroad.initialDate}
+        onChange={(e) => setRailroad({ ...railroad, initialDate: e.target.value })}
+      />
+      {going && (
         <input
-            style={{ marginRight: '5px', width: '100%'}}
-            id="date" 
-            type="date" 
+          id="finalDate"
+          type="date"
+          style={{ marginLeft: '5px', width: '100%' }}
+          value={railroad.finalDate}
+          onChange={(e) => setRailroad({ ...railroad, finalDate: e.target.value })}
         />
-        {going && (
-            <input
-                id="date" 
-                type="date"
-                style={{ marginLeft: '5px', width: '100%'}}
-            />      
-        )}  
-       </div>
-    )
+      )}
+    </div>
+  );
 };
 
 export default DatePicker;

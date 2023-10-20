@@ -11,6 +11,9 @@ interface Railroad {
     classPassage: Array<ClassPassage>;
     classPassageSelected: string;
     numberOfPassengers: number;
+    email: string;
+    initialDate: string;
+    finalDate: string;
 };
 
 export default Railroad;
